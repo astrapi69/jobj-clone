@@ -11,7 +11,7 @@
 	</parent>
 
 	<artifactId>jobj-clone</artifactId>
-	<version>3.2</version>
+	<version>3.3-SNAPSHOT</version>
 
 	<name>${project.artifactId}</name>
 
