@@ -137,26 +137,6 @@ public class CloneObjectExtensionsTest
 	}
 
 	/**
-	 * Test method for {@link CloneObjectExtensions#cloneBean(Object)} with an array.
-	 */
-	@Test(enabled = true)
-	@SneakyThrows
-	public void testCloneWithCloner()
-	{
-		Person actual;
-		Person expected;
-		actual = Person.builder().name("Nikky").nickname("Six").gender(Gender.MALE).about("")
-			.married(false).build();
-		expected = CloneObjectExtensions.withCloner(actual);
-		assertEquals("Cloned bean should be equal with the source object.", expected, actual);
-		actual = Member.buildMember().name("Nikky").nickname("Six").gender(Gender.MALE).about("")
-			.married(false).dateofbirth(new Date()).dateofMarriage(new Date()).build();
-
-		expected = CloneObjectExtensions.withCloner(actual);
-		assertEquals("Cloned bean should be equal with the source object.", expected, actual);
-	}
-
-	/**
 	 * Test method for {@link CloneObjectExtensions#clone(Object)} with an array with primitive
 	 * values.
 	 */
@@ -245,6 +225,26 @@ public class CloneObjectExtensionsTest
 			assertEquals("Cloned object should be equal with the source object.", expected[i],
 				actual[i]);
 		}
+	}
+
+	/**
+	 * Test method for {@link CloneObjectExtensions#cloneBean(Object)} with an array.
+	 */
+	@Test(enabled = true)
+	@SneakyThrows
+	public void testCloneWithCloner()
+	{
+		Person actual;
+		Person expected;
+		actual = Person.builder().name("Nikky").nickname("Six").gender(Gender.MALE).about("")
+			.married(false).build();
+		expected = CloneObjectExtensions.withCloner(actual);
+		assertEquals("Cloned bean should be equal with the source object.", expected, actual);
+		actual = Member.buildMember().name("Nikky").nickname("Six").gender(Gender.MALE).about("")
+			.married(false).dateofbirth(new Date()).dateofMarriage(new Date()).build();
+
+		expected = CloneObjectExtensions.withCloner(actual);
+		assertEquals("Cloned bean should be equal with the source object.", expected, actual);
 	}
 
 	/**
