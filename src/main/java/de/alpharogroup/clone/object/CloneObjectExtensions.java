@@ -37,6 +37,7 @@ import lombok.experimental.UtilityClass;
 public final class CloneObjectExtensions
 {
 	private final static Cloner cloner = new Cloner();
+
 	/**
 	 * Try to clone the given generic object.
 	 *
@@ -125,7 +126,8 @@ public final class CloneObjectExtensions
 		}
 
 		// Try to clone the object with external cloner
-		if(clone == null) {
+		if (clone == null)
+		{
 			clone = withCloner(object);
 		}
 
@@ -135,11 +137,14 @@ public final class CloneObjectExtensions
 	/**
 	 * Try to clone the given object with the external cloner
 	 *
-	 * @param <T> the generic type
-	 * @param object the object
+	 * @param <T>
+	 *            the generic type
+	 * @param object
+	 *            the object
 	 * @return the t
 	 */
-	public static  <T> T withCloner(final @NonNull T object) {
+	public static <T> T withCloner(final @NonNull T object)
+	{
 		return cloner.deepClone(object);
 	}
 
