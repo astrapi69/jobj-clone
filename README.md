@@ -109,6 +109,10 @@ Don't forget to add new units tests on your changes.
 Do not hesitate to contact the jobj-clone developers with your questions, concerns, comments, bug reports, or feature requests.
 - Feature requests, questions and bug reports can be reported at the [issues page](https://github.com/astrapi69/jobj-clone/issues).
 
+# Similar projects
+
+- [cloning](https://github.com/kostaskougios/cloning) deep clone java objects
+
 ## Credits
 
 |**Travis CI**|
