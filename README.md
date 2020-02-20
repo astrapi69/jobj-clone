@@ -51,7 +51,7 @@ Than you can add the dependency to your dependencies:
 	<properties>
 			...
 		<!-- JOBJ-CLONE version -->
-		<jobj-clone.version>3.2</jobj-clone.version>
+		<jobj-clone.version>3.3</jobj-clone.version>
 			...
 	</properties>
 			...
@@ -74,7 +74,7 @@ You can first define the version in the ext section and add than the following g
 ```
 ext {
 			...
-    jobjCloneVersion = "3.2"
+    jobjCloneVersion = "3.3"
 			...
 }
 dependencies {
