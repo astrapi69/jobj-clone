@@ -11,7 +11,7 @@
 
 </div>
 
-Utility library for simply copy java objects.
+Utility library for simply clone java objects.
 
 If you like this project put a ⭐ and donate.
 
@@ -51,7 +51,7 @@ Than you can add the dependency to your dependencies:
 	<properties>
 			...
 		<!-- JOBJ-CLONE version -->
-		<jobj-clone.version>3.2</jobj-clone.version>
+		<jobj-clone.version>3.3</jobj-clone.version>
 			...
 	</properties>
 			...
@@ -74,7 +74,7 @@ You can first define the version in the ext section and add than the following g
 ```
 ext {
 			...
-    jobjCloneVersion = "3.2"
+    jobjCloneVersion = "3.3"
 			...
 }
 dependencies {
@@ -108,6 +108,10 @@ Don't forget to add new units tests on your changes.
 
 Do not hesitate to contact the jobj-clone developers with your questions, concerns, comments, bug reports, or feature requests.
 - Feature requests, questions and bug reports can be reported at the [issues page](https://github.com/astrapi69/jobj-clone/issues).
+
+# Similar projects
+
+- [cloning](https://github.com/kostaskougios/cloning) deep clone java objects
 
 ## Credits
 

@@ -24,16 +24,13 @@ import java.io.IOException;
 import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Objects;
 
 import com.rits.cloning.Cloner;
-
-import lombok.NonNull;
-import lombok.experimental.UtilityClass;
 
 /**
  * The class {@link CloneObjectExtensions} provide methods for clone an object.
  */
-@UtilityClass
 public final class CloneObjectExtensions
 {
 	private final static Cloner cloner = new Cloner();
@@ -76,6 +73,53 @@ public final class CloneObjectExtensions
 		InvocationTargetException, ClassNotFoundException, InstantiationException, IOException
 	{
 		return (T)cloneObject(object);
+	}
+
+	/**
+	 * Try to clone the given object that implements {@link Cloneable}.
+	 *
+	 * @param object
+	 *            The object to clone.
+	 * @return The cloned object or null if the clone process failed.
+	 * @throws NoSuchMethodException
+	 *             Thrown if a matching method is not found or if the name is "&lt;init&gt;"or
+	 *             "&lt;clinit&gt;".
+	 * @throws IllegalAccessException
+	 *             Thrown if this {@code Method} object is enforcing Java language access control
+	 *             and the underlying method is inaccessible.
+	 * @throws InvocationTargetException
+	 *             Thrown if the property accessor method throws an exception
+	 */
+	public static Object cloneCloneable(final Object object)
+		throws NoSuchMethodException, IllegalAccessException, InvocationTargetException
+	{
+		Object clone;
+		if (object.getClass().isArray())
+		{
+			final Class<?> componentType = object.getClass().getComponentType();
+			if (componentType.isPrimitive())
+			{
+				int length = Array.getLength(object);
+				clone = Array.newInstance(componentType, length);
+				while (length-- > 0)
+				{
+					Array.set(clone, length, Array.get(object, length));
+				}
+			}
+			else
+			{
+				clone = ((Object[])object).clone();
+			}
+			if (clone != null)
+			{
+				return clone;
+			}
+		}
+
+		final Class<?> clazz = object.getClass();
+		final Method cloneMethod = clazz.getDeclaredMethod("clone");
+		cloneMethod.setAccessible(true);
+		return cloneMethod.invoke(object, (Object[])null);
 	}
 
 	/**
@@ -143,56 +187,14 @@ public final class CloneObjectExtensions
 	 *            the object
 	 * @return the t
 	 */
-	public static <T> T withCloner(final @NonNull T object)
+	public static <T> T withCloner(final T object)
 	{
+		Objects.requireNonNull(object);
 		return cloner.deepClone(object);
 	}
 
-	/**
-	 * Try to clone the given object that implements {@link Cloneable}.
-	 *
-	 * @param object
-	 *            The object to clone.
-	 * @return The cloned object or null if the clone process failed.
-	 * @throws NoSuchMethodException
-	 *             Thrown if a matching method is not found or if the name is "&lt;init&gt;"or
-	 *             "&lt;clinit&gt;".
-	 * @throws IllegalAccessException
-	 *             Thrown if this {@code Method} object is enforcing Java language access control
-	 *             and the underlying method is inaccessible.
-	 * @throws InvocationTargetException
-	 *             Thrown if the property accessor method throws an exception
-	 */
-	public static Object cloneCloneable(final Object object)
-		throws NoSuchMethodException, IllegalAccessException, InvocationTargetException
+	private CloneObjectExtensions()
 	{
-		Object clone;
-		if (object.getClass().isArray())
-		{
-			final Class<?> componentType = object.getClass().getComponentType();
-			if (componentType.isPrimitive())
-			{
-				int length = Array.getLength(object);
-				clone = Array.newInstance(componentType, length);
-				while (length-- > 0)
-				{
-					Array.set(clone, length, Array.get(object, length));
-				}
-			}
-			else
-			{
-				clone = ((Object[])object).clone();
-			}
-			if (clone != null)
-			{
-				return clone;
-			}
-		}
-
-		final Class<?> clazz = object.getClass();
-		final Method cloneMethod = clazz.getDeclaredMethod("clone");
-		cloneMethod.setAccessible(true);
-		return cloneMethod.invoke(object, (Object[])null);
 	}
 
 }

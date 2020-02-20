@@ -1,6 +1,18 @@
 ## Change log
 ----------------------
 
+Version 3.3
+-------------
+
+ADDED:
+ 
+- new build system gradle
+
+CHANGED:
+
+- removed maven build system and all related files
+- removed all lombok dependent imports
+
 Version 3.2
 -------------
 
