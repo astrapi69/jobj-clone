@@ -20,19 +20,23 @@
  */
 package de.alpharogroup.clone.object;
 
-import de.alpharogroup.collections.array.ArrayFactory;
-import de.alpharogroup.date.CreateDateExtensions;
-import de.alpharogroup.test.objects.*;
-import de.alpharogroup.test.objects.enums.Gender;
-import org.meanbean.test.BeanTestException;
-import org.meanbean.test.BeanTester;
-import org.testng.annotations.Test;
+import static org.testng.AssertJUnit.assertEquals;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
 
-import static org.testng.AssertJUnit.assertEquals;
+import org.meanbean.test.BeanTester;
+import org.testng.annotations.Test;
+
+import de.alpharogroup.collections.array.ArrayFactory;
+import de.alpharogroup.date.CreateDateExtensions;
+import de.alpharogroup.test.objects.A;
+import de.alpharogroup.test.objects.Employee;
+import de.alpharogroup.test.objects.Member;
+import de.alpharogroup.test.objects.NotSerializable;
+import de.alpharogroup.test.objects.Person;
+import de.alpharogroup.test.objects.enums.Gender;
 
 /**
  * The unit test class for the class {@link CloneObjectExtensions}.
@@ -159,9 +163,8 @@ public class CloneObjectExtensionsTest
 	 *             Signals that an I/O exception has occurred.
 	 */
 	@Test(enabled = true)
-	public void testCloneNotSerializable()
-		throws NoSuchMethodException, IllegalAccessException, InstantiationException, IOException,
-		InvocationTargetException, ClassNotFoundException
+	public void testCloneNotSerializable() throws NoSuchMethodException, IllegalAccessException,
+		InstantiationException, IOException, InvocationTargetException, ClassNotFoundException
 	{
 		NotSerializable actual;
 		NotSerializable expected;
@@ -247,7 +250,7 @@ public class CloneObjectExtensionsTest
 	}
 
 	/**
-	 * Test method for {@link CloneObjectExtensions#withCloner(Object)} 
+	 * Test method for {@link CloneObjectExtensions#withCloner(Object)}
 	 */
 	@Test(enabled = true)
 	public void testCloneWithCloner()
