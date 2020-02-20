@@ -1,4 +1,5 @@
 
+import org.gradle.api.XmlProvider
 import org.gradle.api.artifacts.maven.MavenDeployment
 
 plugins {
@@ -82,7 +83,8 @@ task javadocJar(type: Jar) {
 }
 
 artifacts {
-    archives jar
+//    archives jar
+
     archives javadocJar
     archives sourcesJar
 }
