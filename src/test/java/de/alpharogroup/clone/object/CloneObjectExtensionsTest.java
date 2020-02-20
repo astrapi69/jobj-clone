@@ -20,25 +20,19 @@
  */
 package de.alpharogroup.clone.object;
 
-import static org.testng.AssertJUnit.assertEquals;
+import de.alpharogroup.collections.array.ArrayFactory;
+import de.alpharogroup.date.CreateDateExtensions;
+import de.alpharogroup.test.objects.*;
+import de.alpharogroup.test.objects.enums.Gender;
+import org.meanbean.test.BeanTestException;
+import org.meanbean.test.BeanTester;
+import org.testng.annotations.Test;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
 
-import org.meanbean.test.BeanTestException;
-import org.meanbean.test.BeanTester;
-import org.testng.annotations.Test;
-
-import de.alpharogroup.collections.array.ArrayFactory;
-import de.alpharogroup.date.CreateDateExtensions;
-import de.alpharogroup.test.objects.A;
-import de.alpharogroup.test.objects.Employee;
-import de.alpharogroup.test.objects.Member;
-import de.alpharogroup.test.objects.NotSerializable;
-import de.alpharogroup.test.objects.Person;
-import de.alpharogroup.test.objects.enums.Gender;
-import lombok.SneakyThrows;
+import static org.testng.AssertJUnit.assertEquals;
 
 /**
  * The unit test class for the class {@link CloneObjectExtensions}.
@@ -121,10 +115,9 @@ public class CloneObjectExtensionsTest
 	}
 
 	/**
-	 * Test method for {@link CloneObjectExtensions#cloneBean(Object)} with an array.
+	 * Test method for {@link CloneObjectExtensions#withCloner(Object)}
 	 */
 	@Test(enabled = true)
-	@SneakyThrows
 	public void testCloneBeanWithComposition()
 	{
 		Employee actual;
@@ -138,11 +131,37 @@ public class CloneObjectExtensionsTest
 
 	/**
 	 * Test method for {@link CloneObjectExtensions#clone(Object)} with an array with primitive
-	 * values.
+	 * values
+	 *
+	 * @throws NoSuchMethodException
+	 *             Thrown if a matching method is not found or if the name is "&lt;init&gt;"or
+	 *             "&lt;clinit&gt;".
+	 * @throws SecurityException
+	 *             Thrown if the security manager indicates a security violation.
+	 * @throws IllegalAccessException
+	 *             Thrown if this {@code Method} object is enforcing Java language access control
+	 *             and the underlying method is inaccessible.
+	 * @throws InvocationTargetException
+	 *             Thrown if the property accessor method throws an exception
+	 * @throws ClassNotFoundException
+	 *             occurs if a given class cannot be located by the specified class loader
+	 * @throws InstantiationException
+	 *             Thrown if one of the following reasons: the class object
+	 *             <ul>
+	 *             <li>represents an abstract class</li>
+	 *             <li>represents an interface</li>
+	 *             <li>represents an array class</li>
+	 *             <li>represents a primitive type</li>
+	 *             <li>represents {@code void}</li>
+	 *             <li>has no nullary constructor</li>
+	 *             </ul>
+	 * @throws IOException
+	 *             Signals that an I/O exception has occurred.
 	 */
 	@Test(enabled = true)
-	@SneakyThrows
 	public void testCloneNotSerializable()
+		throws NoSuchMethodException, IllegalAccessException, InstantiationException, IOException,
+		InvocationTargetException, ClassNotFoundException
 	{
 		NotSerializable actual;
 		NotSerializable expected;
@@ -154,7 +173,7 @@ public class CloneObjectExtensionsTest
 	}
 
 	/**
-	 * Test method for {@link CloneObjectExtensions#cloneObject(Object)}.
+	 * Test method for {@link CloneObjectExtensions#cloneObject(Object)}
 	 *
 	 * @throws NoSuchMethodException
 	 *             Thrown if a matching method is not found or if the name is "&lt;init&gt;"or
@@ -228,10 +247,9 @@ public class CloneObjectExtensionsTest
 	}
 
 	/**
-	 * Test method for {@link CloneObjectExtensions#cloneBean(Object)} with an array.
+	 * Test method for {@link CloneObjectExtensions#withCloner(Object)} 
 	 */
 	@Test(enabled = true)
-	@SneakyThrows
 	public void testCloneWithCloner()
 	{
 		Person actual;
@@ -250,8 +268,7 @@ public class CloneObjectExtensionsTest
 	/**
 	 * Test method for {@link CloneObjectExtensions} with {@link BeanTester}
 	 */
-	@Test(expectedExceptions = { BeanTestException.class, InvocationTargetException.class,
-			UnsupportedOperationException.class })
+	@Test
 	public void testWithBeanTester()
 	{
 		final BeanTester beanTester = new BeanTester();

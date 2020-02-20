@@ -20,23 +20,24 @@
  */
 package de.alpharogroup.clone.object;
 
+import com.rits.cloning.Cloner;
+
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-
-import com.rits.cloning.Cloner;
-
-import lombok.NonNull;
-import lombok.experimental.UtilityClass;
+import java.util.Objects;
 
 /**
  * The class {@link CloneObjectExtensions} provide methods for clone an object.
  */
-@UtilityClass
 public final class CloneObjectExtensions
 {
 	private final static Cloner cloner = new Cloner();
+
+	private CloneObjectExtensions()
+	{
+	}
 
 	/**
 	 * Try to clone the given generic object.
@@ -143,8 +144,9 @@ public final class CloneObjectExtensions
 	 *            the object
 	 * @return the t
 	 */
-	public static <T> T withCloner(final @NonNull T object)
+	public static <T> T withCloner(final T object)
 	{
+		Objects.requireNonNull(object);
 		return cloner.deepClone(object);
 	}
 

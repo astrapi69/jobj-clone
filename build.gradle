@@ -1,0 +1,161 @@
+
+import org.gradle.api.artifacts.maven.MavenDeployment
+
+plugins {
+    id "java"
+    id "maven-publish"
+    id "signing"
+    id "com.github.ben-manes.versions" version "0.27.0"
+    id "com.github.hierynomus.license" version "0.15.0"
+}
+
+apply plugin: "jacoco"
+apply plugin: "maven"
+
+group = "de.alpharogroup"
+version = "$projectVersion"
+description = "jobj-clone"
+sourceCompatibility = "1.8"
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    compile "uk.com.robust-it:cloning:$cloningVersion"
+    testCompile "de.alpharogroup:vintage-time:$vintageTimeVersion"
+    testCompile "de.alpharogroup:silly-collections:$sillyCollectionsVersion"
+    testCompile "de.alpharogroup:test-objects:$testObjectsVersion"
+    testCompile "org.meanbean:meanbean:$meanbeanVersion"
+    testCompile "org.testng:testng:$testngVersion"
+}
+
+license {
+    ext.year="2015"
+    ext.owner="Asterios Raptis"
+    header rootProject.file("src/main/resources/LICENSE.txt")
+    excludes(["**/README",
+              "**/README.md",
+              "**/LICENSE",
+              "**/NOTICE",
+              "**/*.xml",
+              "**/*.xsl",
+              "**/*.xsd",
+              "**/*.dtd",
+              "**/*.html",
+              "**/*.jsp",
+              "**/*.jpa",
+              "**/*.sql",
+              "**/*.properties",
+              "**/*.bat",
+              "**/*.gradle",
+              "**/*.MF",
+              "**/*.txt",
+              "**/*.vm",
+              "**/*.log",
+              "**/*.map",
+              "**/*.js.map",
+              "**/*.tmpl",
+              "**/*.js.tmpl",
+              "**/*.editorconfig",
+              "src/test/resources/**",
+              "src/main/resources/**",
+              "out/**",
+              "build/**"])
+}
+
+// workhack for license issue #76
+gradle.startParameter.excludedTaskNames += "licenseMain"
+gradle.startParameter.excludedTaskNames += "licenseTest"
+
+task sourcesJar(type: Jar) {
+    archiveClassifier.set("sources")
+    from(sourceSets.main.allJava)
+}
+
+task javadocJar(type: Jar) {
+    from javadoc
+    archiveClassifier.set("javadoc")
+    javadoc.properties.failOnError = true
+}
+
+artifacts {
+    archives jar
+    archives javadocJar
+    archives sourcesJar
+}
+
+def releaseVersion = !version.endsWith("SNAPSHOT")
+
+def releasesRepoUrl = "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
+def snapshotsRepoUrl = "https://oss.sonatype.org/content/repositories/snapshots"
+def repositoryUrl = releaseVersion ? releasesRepoUrl : snapshotsRepoUrl
+
+signing {
+    if (releaseVersion) {
+        sign configurations.archives
+    }
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            beforeDeployment { MavenDeployment deployment -> signing.signPom(deployment) }
+
+            repository(url: repositoryUrl) {
+                authentication(userName: ossrhUsername, password: ossrhPassword)
+            }
+
+            pom.project {
+                name = "${rootProject.name}"
+                packaging = "jar"
+                description = "Simply clone java objects"
+                url = "https://github.com/astrapi69/"+"${rootProject.name}"
+
+                scm {
+                    connection = "scm:git:git:@github.com:astrapi69/"+"${rootProject.name}"+".git"
+                    developerConnection = "scm:git:git@github.com:astrapi69/"+"${rootProject.name}"+".git"
+                    url = "git:@github.com:astrapi69/"+"${rootProject.name}"+".git"
+                }
+                issueManagement {
+                    system = "GitHub"
+                    url = "https://github.com/astrapi69/"+"${rootProject.name}"+"/issues"
+                }
+
+                licenses {
+                    license {
+                        name = "MIT License"
+                        url = "http://www.opensource.org/licenses/mit-license.php"
+                        distribution = "repo"
+                    }
+                }
+
+                developers {
+                    developer {
+                        id = "astrapi69"
+                        name = "Asterios Raptis"
+                    }
+                }
+            }
+        }
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}
+
+test {
+    useTestNG()
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
+        html.enabled false
+    }
+}
+
+check.dependsOn jacocoTestReport
