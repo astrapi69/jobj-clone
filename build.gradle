@@ -26,9 +26,9 @@ repositories {
 
 dependencies {
     compile "uk.com.robust-it:cloning:$cloningVersion"
-    testCompile "de.alpharogroup:vintage-time:$vintageTimeVersion"
     testCompile "de.alpharogroup:silly-collections:$sillyCollectionsVersion"
     testCompile "de.alpharogroup:test-objects:$testObjectsVersion"
+    testCompile "de.alpharogroup:vintage-time:$vintageTimeVersion"
     testCompile "org.meanbean:meanbean:$meanbeanVersion"
     testCompile "org.testng:testng:$testngVersion"
 }

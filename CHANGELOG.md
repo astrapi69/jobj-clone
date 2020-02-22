@@ -4,6 +4,12 @@
 Version 3.4-SNAPSHOT
 -------------
 
+CHANGED:
+
+- update of testng dependency version to 7.1.1
+- update of vintage-time dependency version to 5.2
+- update of silly-collections dependency version to 8
+
 Version 3.3
 -------------
 
