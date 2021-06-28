@@ -1,12 +1,12 @@
 # Overview
 
-<div align="center">
+<div style="text-align: center">
 
 [![Build Status](https://api.travis-ci.com/astrapi69/jobj-clone.svg?branch=master)](https://travis-ci.com/github/astrapi69/jobj-clone)
 [![Coverage Status](https://coveralls.io/repos/github/astrapi69/jobj-clone/badge.svg?branch=develop)](https://coveralls.io/github/astrapi69/jobj-clone?branch=develop)
 [![Open Issues](https://img.shields.io/github/issues/astrapi69/jobj-clone.svg?style=flat)](https://github.com/astrapi69/jobj-clone/issues)
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/de.alpharogroup/jobj-clone/badge.svg)](https://maven-badges.herokuapp.com/maven-central/de.alpharogroup/jobj-clone)
-[![Javadocs](http://www.javadoc.io/badge/de.alpharogroup/jobj-clone.svg)](http://www.javadoc.io/doc/de.alpharogroup/jobj-clone)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/io.github.astrapi69/jobj-clone/badge.svg)](https://maven-badges.herokuapp.com/maven-central/io.github.astrapi69/jobj-clone)
+[![Javadocs](http://www.javadoc.io/badge/io.github.astrapi69/jobj-clone.svg)](http://www.javadoc.io/doc/io.github.astrapi69/jobj-clone)
 [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat)](http://opensource.org/licenses/MIT)
 
 </div>
@@ -92,7 +92,7 @@ applications.
 ## Maven dependency
 
 Maven dependency is now on sonatype. Check
-out [sonatype repository](https://oss.sonatype.org/index.html#nexus-search;gav~de.alpharogroup~jobj-clone~~~)
+out [sonatype repository](https://oss.sonatype.org/index.html#nexus-search;gav~io.github.astrapi69~jobj-clone~~~)
 for latest snapshots and releases.
 
 Add the following maven dependency to your project `pom.xml` if you want to import the core
@@ -103,7 +103,7 @@ Than you can add the dependency to your dependencies:
 	<properties>
 			...
 		<!-- JOBJ-CLONE version -->
-		<jobj-clone.version>3.3</jobj-clone.version>
+		<jobj-clone.version>3.4</jobj-clone.version>
 			...
 	</properties>
 			...
@@ -111,7 +111,7 @@ Than you can add the dependency to your dependencies:
 			...
 			<!-- JOBJ-CLONE DEPENDENCY -->
 			<dependency>
-				<groupId>de.alpharogroup</groupId>
+				<groupId>io.github.astrapi69</groupId>
 				<artifactId>jobj-clone</artifactId>
 				<version>${jobj-clone.version}</version>
 			</dependency>
@@ -123,15 +123,29 @@ Than you can add the dependency to your dependencies:
 You can first define the version in the ext section and add than the following gradle dependency to
 your project `build.gradle` if you want to import the core functionality of jobj-clone:
 
+define version in file gradle.properties
+
+```
+
+jobjCloneVersion=3.4
+```
+
+or in build.gradle ext area
+
 ```
 ext {
 			...
-    jobjCloneVersion = "3.3"
+    jobjCloneVersion = "3.4"
 			...
 }
+```
+
+and then add the dependency to the dependencies area
+
+```
 dependencies {
 			...
-compile "de.alpharogroup:jobj-clone:${jobjCloneVersion}"
+    implementation("io.github.astrapi69:jobj-clone:$jobjCloneVersion")
 			...
 }
 ```
@@ -181,7 +195,7 @@ reports, or feature requests.
 
 |**Nexus Sonatype repositories**|
 |     :---:      |
-|[![sonatype repository](https://img.shields.io/nexus/r/https/oss.sonatype.org/de.alpharogroup/jobj-clone.svg?style=for-the-badge)](https://oss.sonatype.org/index.html#nexus-search;gav~de.alpharogroup~jobj-clone~~~)|
+|[![sonatype repository](https://img.shields.io/nexus/r/https/oss.sonatype.org/io.github.astrapi69/jobj-clone.svg?style=for-the-badge)](https://oss.sonatype.org/index.html#nexus-search;gav~io.github.astrapi69~jobj-clone~~~)|
 |Special thanks to [sonatype repository](https://www.sonatype.com) for providing a free maven repository service for open source projects|
 |     <img width=1000/>     |
 
@@ -193,6 +207,6 @@ reports, or feature requests.
 
 |**javadoc.io**|
 |     :---:      |
-|[![Javadocs](http://www.javadoc.io/badge/de.alpharogroup/jobj-clone.svg)](http://www.javadoc.io/doc/de.alpharogroup/jobj-clone)|
+|[![Javadocs](http://www.javadoc.io/badge/io.github.astrapi69/jobj-clone.svg)](http://www.javadoc.io/doc/io.github.astrapi69/jobj-clone)|
 |Special thanks to [javadoc.io](http://www.javadoc.io) for providing a free javadoc documentation for open source projects|
 |     <img width=1000/>     |
