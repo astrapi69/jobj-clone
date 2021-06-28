@@ -18,25 +18,24 @@
  * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package de.alpharogroup.clone.object;
+package io.github.astrapi69.clone.object;
 
-import static org.testng.AssertJUnit.assertEquals;
+import io.github.astrapi69.collections.array.ArrayFactory;
+import io.github.astrapi69.date.CreateDateExtensions;
+import io.github.astrapi69.test.objects.A;
+import io.github.astrapi69.test.objects.Employee;
+import io.github.astrapi69.test.objects.Member;
+import io.github.astrapi69.test.objects.NotSerializable;
+import io.github.astrapi69.test.objects.Person;
+import io.github.astrapi69.test.objects.enums.Gender;
+import org.meanbean.test.BeanTester;
+import org.testng.annotations.Test;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
 
-import org.meanbean.test.BeanTester;
-import org.testng.annotations.Test;
-
-import de.alpharogroup.collections.array.ArrayFactory;
-import de.alpharogroup.date.CreateDateExtensions;
-import de.alpharogroup.test.objects.A;
-import de.alpharogroup.test.objects.Employee;
-import de.alpharogroup.test.objects.Member;
-import de.alpharogroup.test.objects.NotSerializable;
-import de.alpharogroup.test.objects.Person;
-import de.alpharogroup.test.objects.enums.Gender;
+import static org.testng.AssertJUnit.assertEquals;
 
 /**
  * The unit test class for the class {@link CloneObjectExtensions}.
@@ -72,8 +71,8 @@ public class CloneObjectExtensionsTest
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
-	@Test(enabled = true)
-	public void testClone() throws NoSuchMethodException, SecurityException, IllegalAccessException,
+	@Test(enabled = true) public void testClone()
+		throws NoSuchMethodException, SecurityException, IllegalAccessException,
 		InvocationTargetException, ClassNotFoundException, InstantiationException, IOException
 	{
 		Object expected;
@@ -101,10 +100,10 @@ public class CloneObjectExtensionsTest
 	/**
 	 * Test method for {@link CloneObjectExtensions#clone(Object)} with an array.
 	 */
-	@Test(enabled = true)
-	public void testCloneArray() throws NoSuchMethodException, SecurityException,
-		IllegalAccessException, IllegalArgumentException, InvocationTargetException,
-		ClassNotFoundException, InstantiationException, IOException
+	@Test(enabled = true) public void testCloneArray()
+		throws NoSuchMethodException, SecurityException, IllegalAccessException,
+		IllegalArgumentException, InvocationTargetException, ClassNotFoundException,
+		InstantiationException, IOException
 	{
 		String[] expected;
 		String[] actual;
@@ -121,14 +120,14 @@ public class CloneObjectExtensionsTest
 	/**
 	 * Test method for {@link CloneObjectExtensions#withCloner(Object)}
 	 */
-	@Test(enabled = true)
-	public void testCloneBeanWithComposition()
+	@Test(enabled = true) public void testCloneBeanWithComposition()
 	{
 		Employee actual;
 		Employee expected;
 
-		actual = Employee.builder().person(Person.builder().name("Nikky").nickname("Six")
-			.gender(Gender.MALE).about("").married(false).build()).build();
+		actual = Employee.builder().person(
+			Person.builder().name("Nikky").nickname("Six").gender(Gender.MALE).about("")
+				.married(false).build()).build();
 		expected = CloneObjectExtensions.withCloner(actual);
 		assertEquals("Cloned bean should be equal with the source object.", expected, actual);
 	}
@@ -162,9 +161,9 @@ public class CloneObjectExtensionsTest
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
-	@Test(enabled = true)
-	public void testCloneNotSerializable() throws NoSuchMethodException, IllegalAccessException,
-		InstantiationException, IOException, InvocationTargetException, ClassNotFoundException
+	@Test(enabled = true) public void testCloneNotSerializable()
+		throws NoSuchMethodException, IllegalAccessException, InstantiationException, IOException,
+		InvocationTargetException, ClassNotFoundException
 	{
 		NotSerializable actual;
 		NotSerializable expected;
@@ -203,9 +202,9 @@ public class CloneObjectExtensionsTest
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
-	@Test(enabled = true)
-	public void testCloneObject() throws NoSuchMethodException, IllegalAccessException,
-		InvocationTargetException, ClassNotFoundException, InstantiationException, IOException
+	@Test(enabled = true) public void testCloneObject()
+		throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
+		ClassNotFoundException, InstantiationException, IOException
 	{
 
 		Object expected;
@@ -230,8 +229,7 @@ public class CloneObjectExtensionsTest
 	 * Test method for {@link CloneObjectExtensions#clone(Object)} with an array with primitive
 	 * values.
 	 */
-	@Test(enabled = true)
-	public void testClonePrimitiveArray()
+	@Test(enabled = true) public void testClonePrimitiveArray()
 		throws NoSuchMethodException, SecurityException, IllegalAccessException,
 		InvocationTargetException, ClassNotFoundException, InstantiationException, IOException
 	{
@@ -252,8 +250,7 @@ public class CloneObjectExtensionsTest
 	/**
 	 * Test method for {@link CloneObjectExtensions#withCloner(Object)}
 	 */
-	@Test(enabled = true)
-	public void testCloneWithCloner()
+	@Test(enabled = true) public void testCloneWithCloner()
 	{
 		Person actual;
 		Person expected;
@@ -271,8 +268,7 @@ public class CloneObjectExtensionsTest
 	/**
 	 * Test method for {@link CloneObjectExtensions} with {@link BeanTester}
 	 */
-	@Test
-	public void testWithBeanTester()
+	@Test public void testWithBeanTester()
 	{
 		final BeanTester beanTester = new BeanTester();
 		beanTester.testBean(CloneObjectExtensions.class);
