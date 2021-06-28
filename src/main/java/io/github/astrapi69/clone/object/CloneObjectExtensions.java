@@ -18,7 +18,9 @@
  * DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-package de.alpharogroup.clone.object;
+package io.github.astrapi69.clone.object;
+
+import com.rits.cloning.Cloner;
 
 import java.io.IOException;
 import java.lang.reflect.Array;
@@ -26,14 +28,16 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Objects;
 
-import com.rits.cloning.Cloner;
-
 /**
  * The class {@link CloneObjectExtensions} provide methods for clone an object.
  */
 public final class CloneObjectExtensions
 {
 	private final static Cloner cloner = new Cloner();
+
+	private CloneObjectExtensions()
+	{
+	}
 
 	/**
 	 * Try to clone the given generic object.
@@ -68,9 +72,9 @@ public final class CloneObjectExtensions
 	 * @throws IOException
 	 *             Signals that an I/O exception has occurred.
 	 */
-	@SuppressWarnings("unchecked")
-	public static <T> T clone(final T object) throws NoSuchMethodException, IllegalAccessException,
-		InvocationTargetException, ClassNotFoundException, InstantiationException, IOException
+	@SuppressWarnings("unchecked") public static <T> T clone(final T object)
+		throws NoSuchMethodException, IllegalAccessException, InvocationTargetException,
+		ClassNotFoundException, InstantiationException, IOException
 	{
 		return (T)cloneObject(object);
 	}
@@ -191,10 +195,6 @@ public final class CloneObjectExtensions
 	{
 		Objects.requireNonNull(object);
 		return cloner.deepClone(object);
-	}
-
-	private CloneObjectExtensions()
-	{
 	}
 
 }
